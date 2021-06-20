@@ -1,0 +1,11 @@
+package com.modelo.servidor.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.modelo.servidor.entity.Tipo;
+
+public interface TipoDAO extends JpaRepository<Tipo, Integer> {
+	
+	
+
+}

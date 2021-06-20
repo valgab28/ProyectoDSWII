@@ -1,0 +1,60 @@
+package com.backup.servidor.entity;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name="tb_informerai")
+public class InformeRai implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="idtipo")
+	private int codigo;
+	
+	@Column(name="nombre")
+	private String nombre;
+	
+	//de uno a muchos
+	@JsonIgnore
+	@OneToMany(mappedBy = "tipo")
+	private List<InformeMultiple> listaMercaderia;
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public List<InformeMultiple> getListaMercaderia() {
+		return listaMercaderia;
+	}
+
+	public void setListaMercaderia(List<InformeMultiple> listaMercaderia) {
+		this.listaMercaderia = listaMercaderia;
+	}
+	
+	
+	
+	
+}

@@ -1,0 +1,43 @@
+package com.backup.cliente.entity;
+
+public class PlanTrabajo {
+	
+	private int codigo;
+	
+	private String area;
+	
+	private String responsable;
+	
+	private String inicio;
+	
+	private String fin;
+	
+	private String rec;
+	
+	private String incidencias;
+	
+	
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	
+	
+	
+	
+	
+	
+}

@@ -1,0 +1,48 @@
+package com.modelo.servidor.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.modelo.servidor.entity.Mercaderia;
+import com.modelo.servidor.service.MercaderiaService;
+
+@RestController
+@RequestMapping("/mercaderia")
+public class MercaderiaController {
+
+	@Autowired
+	private MercaderiaService servicio;
+	
+	@GetMapping("/lista")
+	@ResponseBody
+	public List<Mercaderia> lista(){
+		return servicio.listar();
+	}
+	
+	@PostMapping("/registrar")
+	public void registrar(@RequestBody Mercaderia bean) {
+		servicio.registrar(bean);
+	}
+	
+	@DeleteMapping("/eliminar/{codigo}")
+	public void eliminar(@PathVariable("codigo") int cod) {
+		servicio.eliminar(cod);
+	}
+	
+	//consulta
+	@GetMapping("/consulta/{precio1}/{precio2}")
+	@ResponseBody
+	public List<Mercaderia> consulta(@PathVariable("precio1") double pre1,
+									@PathVariable("precio2") double pre2){
+		return servicio.consultar(pre1, pre2);
+	}
+}

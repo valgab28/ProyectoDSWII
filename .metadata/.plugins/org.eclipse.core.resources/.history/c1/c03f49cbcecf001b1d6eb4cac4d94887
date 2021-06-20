@@ -1,0 +1,107 @@
+package com.backup.servidor.entity;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name="tb_informemultiple")
+public class UnidadOrganica implements Serializable{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "cod_uniO")
+	private int codigo;
+	
+	@Column(name = "nom_uniO")
+	private String nombre;
+	
+	@Column(name = "ape_uniO")
+	private int apellido;
+	
+	@Column(name="correo")
+	private double correo;
+	
+	@Column(name="asunto")
+	private double asunto;
+	
+	//de uno a muchos
+		@JsonIgnore
+		@OneToMany(mappedBy = "tb_unidadorganica")
+		private List<InformeMultiple> listaInformeMultiple;
+
+		@JsonIgnore
+		@OneToMany(mappedBy = "tb_unidadorganica")
+		private List<Memorando> listaMemorando;
+
+		public int getCodigo() {
+			return codigo;
+		}
+
+		public void setCodigo(int codigo) {
+			this.codigo = codigo;
+		}
+
+		public String getNombre() {
+			return nombre;
+		}
+
+		public void setNombre(String nombre) {
+			this.nombre = nombre;
+		}
+
+		public int getApellido() {
+			return apellido;
+		}
+
+		public void setApellido(int apellido) {
+			this.apellido = apellido;
+		}
+
+		public double getCorreo() {
+			return correo;
+		}
+
+		public void setCorreo(double correo) {
+			this.correo = correo;
+		}
+
+		public double getAsunto() {
+			return asunto;
+		}
+
+		public void setAsunto(double asunto) {
+			this.asunto = asunto;
+		}
+
+		public List<InformeMultiple> getListaInformeMultiple() {
+			return listaInformeMultiple;
+		}
+
+		public void setListaInformeMultiple(List<InformeMultiple> listaInformeMultiple) {
+			this.listaInformeMultiple = listaInformeMultiple;
+		}
+
+		public List<Memorando> getListaMemorando() {
+			return listaMemorando;
+		}
+
+		public void setListaMemorando(List<Memorando> listaMemorando) {
+			this.listaMemorando = listaMemorando;
+		}
+		
+		
+	
+
+}

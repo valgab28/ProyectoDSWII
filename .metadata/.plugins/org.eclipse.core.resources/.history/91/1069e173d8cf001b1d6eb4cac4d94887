@@ -1,0 +1,155 @@
+package com.backup.cliente.controller;
+
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.gson.Gson;
+import com.modelo.cliente.entity.Mercaderia;
+import com.modelo.cliente.entity.Tipo;
+
+@Controller
+@RequestMapping("/mercaderia")
+public class InformeRaiController {
+	
+	private String URL_TIPO="http://localhost:8091/tipo/";
+	private String URL_MERCADERIA="http://localhost:8091/mercaderia/";
+	
+	
+	@RequestMapping("/")
+	public String index(Model model) {
+		
+		try {
+			RestTemplate rt=new RestTemplate();
+			ResponseEntity<PlanTrabajo[]>response1=rt.getForEntity(URL_TIPO+"lista", PlanTrabajo[].class);
+			ResponseEntity<InformeRai[]>response2=rt.getForEntity(URL_MERCADERIA+"lista", InformeRai[].class);
+			model.addAttribute("tipos",response1.getBody());
+			model.addAttribute("mercaderias",response2.getBody());
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "mercaderia";
+	}
+
+	
+	
+	@RequestMapping("/guardar")
+	public String guardar(@RequestParam("nombre") String nom, @RequestParam("stock") int stock, @RequestParam("precio") double precio,
+						@RequestParam("tipo") int codTipo, RedirectAttributes redirect) {
+		
+		
+		try {
+			
+			InformeRai bean=new InformeRai();
+			bean.setNombre(nom);
+			bean.setStock(stock);
+			bean.setPrecio(precio);
+			PlanTrabajo t=new PlanTrabajo();
+			t.setCodigo(codTipo);
+			bean.setTipo(t);
+			
+			//
+			Gson gson=new Gson();
+			String json=gson.toJson(bean);
+			
+			RestTemplate rs=new RestTemplate();
+			
+			
+			HttpHeaders header=new HttpHeaders();
+			header.setContentType(MediaType.APPLICATION_JSON);
+			HttpEntity<String> request=new HttpEntity<String>(json,header);
+			
+			rs.postForObject(URL_MERCADERIA+"registrar", request, String.class);
+			
+			redirect.addFlashAttribute("MENSAJE","Mercaderia Registrada");
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			redirect.addFlashAttribute("MENSAJE","Error en el registro");
+		}
+		
+		
+		
+		
+		return "redirect:/mercaderia/";
+	}
+	
+	
+	@RequestMapping("/eliminar")
+	public String eliminar(@RequestParam("codigo") int cod,RedirectAttributes redirect) {
+		
+		try {
+			
+			RestTemplate rt=new RestTemplate();
+			rt.delete(URL_MERCADERIA+"eliminar/"+cod);
+			redirect.addFlashAttribute("MENSAJE", "Mercaderia eliminada");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			redirect.addFlashAttribute("MENSAJE", "Error en la aliminación");
+		}
+		
+		
+		
+		return "redirect:/mercaderia/";
+	}
+	
+	
+	
+	@RequestMapping("/consulta")
+	public String index() {
+		
+		return "consulta";
+		
+	}
+	
+	
+	@RequestMapping("/listado")
+	@ResponseBody
+	public InformeRai[] listado(@RequestParam("precio1") double pre1, @RequestParam("precio2") double pre2) {
+		InformeRai[] data=null;
+		try {
+			RestTemplate rt=new RestTemplate();
+			ResponseEntity<InformeRai[]>response=rt.getForEntity(URL_MERCADERIA+"consulta/"+pre1+"/"+pre2, InformeRai[].class);
+			data=response.getBody();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+		
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

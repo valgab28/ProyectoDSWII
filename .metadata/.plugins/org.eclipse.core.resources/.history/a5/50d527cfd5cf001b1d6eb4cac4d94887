@@ -1,0 +1,13 @@
+package com.backup.servidor.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.backup.servidor.entity.InformeRai;
+import com.modelo.servidor.entity.Mercaderia;
+
+public interface InformeRaiDAO extends JpaRepository<InformeRai, Integer> {
+	
+
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
+    <fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
+    <fullyQualifiedTypeName name="com.backup.servidor.entity.Usuario"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonIgnore"/>
+    <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.backup.servidor.entity.UnidadOrganica"/>
+    <fullyQualifiedTypeName name="com.backup.servidor.service.InformeRaiService"/>
+    <fullyQualifiedTypeName name="com.backup.servidor.repository.InformeRaiDAO"/>
+    <fullyQualifiedTypeName name="com.backup.servidor.entity.InformeRai"/>
+    <fullyQualifiedTypeName name="com.backup.servidor.service.PlanTrabajoService"/>
+    <fullyQualifiedTypeName name="com.backup.servidor.repository.PlanTrabajoDAO"/>
+    <fullyQualifiedTypeName name="com.backup.servidor.entity.PlanTrabajo"/>
+    <fullyQualifiedTypeName name="com.backup.cliente.entity.PlanTrabajo"/>
+    <fullyQualifiedTypeName name="com.backup.cliente.entity.InformeRai"/>
+    <fullyQualifiedTypeName name="com.backup.cliente.entity.Usuario"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,22 @@
+package com.modelo.servidor.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.modelo.servidor.entity.Tipo;
+import com.modelo.servidor.repository.TipoDAO;
+
+@Service
+public class TipoService {
+	
+	@Autowired
+	private PlanTrabajoDAO dao;
+	
+	
+	public List<Tipo> listar(){
+		return dao.findAll();
+	}
+
+}
